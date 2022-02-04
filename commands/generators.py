@@ -1,11 +1,166 @@
 from discord.ext import commands
-from random import randint
+from random import randint, choice
 import discord
 
 class Generators(commands.Cog):
     """Gerador de cartas e efeitos do RPG"""
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command(name="signo")
+    async def sign_generator(self, ctx):
+        signs_list = [
+            'Quetzalcoatl', 'Behemoth', 'Leviatã', 'Wiindigoo', 'Fogo Fatuo', 'Ifrit', 'Mangoroa', 'Nidhog',
+            'Carbuncle', 'Silfide', 'Wyvern', 'Siren',
+        ]
+
+        sign_image_list = [
+            'https://i.pinimg.com/564x/ae/9f/9c/ae9f9c8ac8ec210da41869a8131ff633.jpg',
+            'https://i.pinimg.com/564x/6e/c1/b2/6ec1b282e5bcf20e9269eac2e0cc1d44.jpg',
+            'https://i.pinimg.com/564x/c5/0a/21/c50a2198072df0cf7fbd697c88a16c8f.jpg',
+            'https://i.pinimg.com/564x/d0/c3/18/d0c3183041f7f2eff89a626ddf3f4646.jpg',
+            'https://i.pinimg.com/564x/53/9b/ad/539bad76371e256abe31b2a43d2af7ca.jpg',
+            'https://i.pinimg.com/564x/0a/95/c2/0a95c2af572cf185300db14e13179ee3.jpg',
+            'https://i.pinimg.com/564x/b9/bc/90/b9bc908fae1144ffcd22c504cb4f487b.jpg',
+            'https://i.pinimg.com/564x/7a/d2/f7/7ad2f7aec88870e227fe4d350f18705f.jpg',
+            'https://i.pinimg.com/564x/39/bd/27/39bd2782778c4fe35d491d65fca287f9.jpg',
+            'https://i.pinimg.com/564x/a9/ab/41/a9ab413a24d0c4d17025bd41e6b0fc4d.jpg',
+            'https://i.pinimg.com/564x/b7/ee/99/b7ee99177b8b1e17cfc6ae6dc45cd4b5.jpg',
+            'https://i.pinimg.com/564x/e6/56/28/e656280d27b13680af48c5345c540a00.jpg',
+        ]
+
+        sign_generator = randint(0, len(signs_list) - 1)
+
+        embed_image = discord.Embed(
+            title=f"{signs_list[sign_generator]}",
+            colour=0x00FFFF
+        )
+
+        embed_image.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
+        embed_image.set_footer(text=f'{self.bot.user.name} é um bot do Davus', icon_url=self.bot.user.avatar_url)
+
+        embed_image.set_image(url=sign_image_list[sign_generator])
+
+        await ctx.send(embed=embed_image)
+
+    @commands.command(name="baú")
+    async def normal_chest_items_generator(self, ctx):
+        gemms = []
+        gemm_ten = [
+            'Azurita (azul escuro mosqueado opaco)',
+            'Ágata malhada(marrom, azul, branca ou vermelho translúcido e listrado)',
+            'Quartzo azul(azul claro transparente)',
+            'Ágata ocular (círculos translúcidos de cinza, branco, marro, azul ou verde)',
+            'Hematita (cinza escuro opaco)',
+            'Lápis lazúli (azul claro e escuro opaco com manchas amarelas)',
+            'Malaquita (opaco estriado com verde claro e escuro)',
+            'Ágata musgo (rosa translúcido ou amarelo claro com cinza musgo ou marcas verdes)',
+            'Obsidiana (preto opaco)',
+            'Rodocrosita (azul claro opaco)',
+            'Olho de tigre (marrom translúcido com centro dourado)',
+            'Turquesa (azul esverdeado claro opaco)',
+        ]
+
+        for c in range(0, 5):
+            gem_choice = f'{choice(gemm_ten)}'
+            gemms.append(f'{gem_choice}')
+
+        chest_loot = [
+            f'-Machado comum \n-{gemms[0]} \n-{gemms[1]} \n-{gemms[2]}'
+        ]
+
+        response = f'{choice(chest_loot)}'
+
+        await ctx.send(response)
+
+    @commands.command(name="baúazul")
+    async def blue_chest_generator(self, ctx):
+        gemms = []
+        gemm_twenty = [
+            'Pedra de sangue(cinza escuro opaco com manchas vermelhas)',
+        'Cornalina(de laranja a vermelho amarronzado opaco)',
+        'Calcedônia(branco opaco)',
+        'Crisoprásio(verde translúcido)',
+        'Citrina(amarelo claro amarronzado transparente)',
+        'Jaspe(azul, preto ou marrom opaco)',
+        'Pedra lunar(branco translúcido com azul claro brilhante)',
+        'Ônix(faixas opacas de preto e branco, ou preto ou branco puro)',
+        'Quartzo(branco transparente, cinza ou amarelo esfumaçado)',
+        'Sardônica(faixas opacas de vermelho e branco)',
+        'Quartzo rosa estrela(pedra rosa translúcida com centro branco em forma de estrela)',
+        'Zircônio(azul esverdeado claro transparente)',
+
+        ]
+
+        for c in range(0, 5):
+            gem_choice = f'{choice(gemm_twenty)}'
+            gemms.append(f'{gem_choice}')
+
+        chest_loot = [
+            f'-Runa \n-{gemms[0]} \n-{gemms[1]} \n-Colar Elfico, de cordão delicado e com uma flor brotando entre os veios do cordão',
+            ''
+        ]
+
+        response = f'{choice(chest_loot)}'
+
+        await ctx.send(response)
+
+    @commands.command(name="baúroxo")
+    async def purple_chest_generator(self, ctx):
+        gemms = []
+        gemm_fifty = [
+            'Pedra de sangue(cinza escuro opaco com manchas vermelhas)',
+        'Cornalina(de laranja a vermelho amarronzado opaco)',
+        'Calcedônia(branco opaco)',
+        'Crisoprásio(verde translúcido)',
+        'Citrina(amarelo claro amarronzado transparente)',
+        'Jaspe(azul, preto ou marrom opaco)',
+        'Pedra lunar(branco translúcido com azul claro brilhante)',
+        'Ônix(faixas opacas de preto e branco, ou preto ou branco puro)',
+        'Quartzo(branco transparente, cinza ou amarelo esfumaçado)',
+        'Sardônica(faixas opacas de vermelho e branco)',
+        'Quartzo rosa estrela(pedra rosa translúcida com centro branco em forma de estrela)',
+        'Zircônio(azul esverdeado claro transparente)',
+
+        ]
+
+        for c in range(0, 5):
+            gem_choice = f'{choice(gemm_fifty)}'
+            gemms.append(f'{gem_choice}')
+
+        chest_loot = [
+            f'-Runa \n-{gemms[0]} \n-{gemms[1]} \n-Colar Elfico, de cordão delicado e com uma flor brotando entre os veios do cordão',
+            ''
+        ]
+
+        response = f'{choice(chest_loot)}'
+
+        await ctx.send(response)
+
+    @commands.command(name="loot")
+    async def pick_a_loot(self, ctx):
+        coin = randint(1, 50)
+
+        loot_list = [
+            'Ampulheta de bronze',
+            f'{coin}PO e um machado gasto', f'{coin}PP e uma maça estrela', f'{coin}PPAgulha de costura', 'Algemas (obra-prima)',
+            f'Algemas e {coin} PP', 'Algibeira', f'Anzol e {coin} PP', 'Apito de advertência', 'Balde (vazio)', 'Barril (vazio)',
+            'Baú (vazio)', 'Caneco de cerâmica', 'Caneta tinteiro', 'Cantil	1 PO', 'Cesto (vazio)', 'Cobertor de inverno',
+            'Corda de Cânhamo (15 m)', 'Corda de seda (15 m)', 'Corrente (3 m)', 'Escada (3 m)', 'Esmeril', 'Espelho de metal pequeno',
+            'Estrepes', 'Fechadura muito simples', 'Fechadura padrão', 'Fechadura boa', 'Fechadura Incrível',
+            'Frasco (vazio)', 'Garrafa de vinho (vidro)', 'Giz (1 pedaço)', 'jarro de cerâmica', 'Lâmpada',
+            'Lanterna coberta', 'Lanterna furta-fogo', 'Lenha (por dia)', 'Lona (m²)', 'Luneta', 'Marreta', 'Giz branco',
+            'Vela preta', 'Bandana vermelha', 'Dados de 6 lados', 'Brincos de ouro', 'Moeda com dois lados cara',
+            'Vidro de ácido', 'Um pano fino embrulhando uma porção de gemas', 'Martelo', 'Mochila (vazia)', 'Óleo (500 ml)',
+            'Pá', 'Panela de ferro', 'Parafina', 'Pé de cabra', 'Pederneira e isqueiro', 'Pergaminho (folha)', 'Picareta de mina',
+            'Píton', 'Porta-mapas', 'Pote de cerâmica', 'Rações de viagem para 2 dias', 'Rede de pesca (5 x 5 m)',
+            'Sabão (por kg)', 'Saco (vazio)', 'Saco de dormir', 'Sinete', 'Sino', 'Talha ou sisal', 'Tenda',
+            'Tinta (vidro de 30 ml)', 'Tocha', 'Vara', 'Vela', 'Vidro para tinta ou poção',
+        ]
+
+        item = loot_list[randint(0, len(loot_list) - 1)]
+
+        await ctx.send(item)
 
     @commands.command(name='tarot')
     async def pick_a_card(self, ctx):
